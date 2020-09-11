@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.aaron.cas.config.SpringConfig,\
+  com.aaron.cas.config.DataSourceConfig,\
+  com.aaron.cas.config.MyAuthenticationConfiguration

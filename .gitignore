@@ -1,0 +1,5 @@
+# Project exclude paths
+/sso-client/target/
+/sso-client-spring/target/
+/sso-client-springboot/target/
+/sso-server/target/

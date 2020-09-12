@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.aaron.cas.config.SpringConfig,\
   com.aaron.cas.config.DataSourceConfig,\
-  com.aaron.cas.config.MyAuthenticationConfiguration
+  com.aaron.cas.config.CustomAuthenticationConfiguration,\
+  com.aaron.cas.config.CustomAuthWebflowConfiguration

@@ -1,6 +1,7 @@
 package com.aaron.cas.config;
 
-import com.aaron.cas.handler.MyAuthenticationHandler;
+import com.aaron.cas.adaptors.generic.UserNamePassWordCaptchaAuthenticationHandler;
+import com.aaron.cas.service.UserService;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
@@ -18,9 +19,9 @@ import org.springframework.context.annotation.Configuration;
  * @description 注册验证器
  * @date 2020/9/9
  */
-@Configuration("myAuthenticationConfiguration")
+@Configuration("customAuthenticationConfiguration")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
-public class MyAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer {
+public class CustomAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer {
     @Autowired
     private CasConfigurationProperties casProperties;
 
@@ -28,13 +29,21 @@ public class MyAuthenticationConfiguration implements AuthenticationEventExecuti
     @Qualifier("servicesManager")
     private ServicesManager servicesManager;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 将自定义验证器注册为Bean
      * @return
      */
     @Bean
-    public AuthenticationHandler myAuthenticationHandler() {
-        MyAuthenticationHandler handler = new MyAuthenticationHandler(MyAuthenticationHandler.class.getSimpleName(), servicesManager, new DefaultPrincipalFactory(), 1);
+    public AuthenticationHandler userNamePassWordCaptchaAuthenticationHandler() {
+        UserNamePassWordCaptchaAuthenticationHandler handler = new UserNamePassWordCaptchaAuthenticationHandler(
+                UserNamePassWordCaptchaAuthenticationHandler.class.getSimpleName(),
+                servicesManager,
+                new DefaultPrincipalFactory(),
+                1);
+        handler.setUserService(userService);
         return handler;
     }
 
@@ -44,6 +53,6 @@ public class MyAuthenticationConfiguration implements AuthenticationEventExecuti
      */
     @Override
     public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
-        plan.registerAuthenticationHandler(myAuthenticationHandler());
+        plan.registerAuthenticationHandler(userNamePassWordCaptchaAuthenticationHandler());
     }
 }

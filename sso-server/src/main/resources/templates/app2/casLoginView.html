@@ -36,6 +36,20 @@
                        th:value="123456" />
             </div>
         </section>
+        <section class="row">
+            <label for="captcha">验证码:</label>
+            <div>
+                <input class="required"
+                       id="captcha"
+                       name="captcha"
+                       size="10"
+                       tabindex="2"
+                       th:field="*{captcha}"
+                       autocomplete="off"/>
+                <!--<img th:src="@{/captcha.jpg}" id="captcha_img" onclick="javascript:refreshCaptcha()"/>
+                (看不清<a href="javascript:void(0)" onclick="javascript:refreshCaptcha()">换一张</a>)-->
+            </div>
+        </section>
         <section>
             <input type="hidden" name="execution" th:value="${flowExecutionKey}" />
             <input type="hidden" name="_eventId" value="submit" />
@@ -45,4 +59,10 @@
     </form>
 </div>
 </body>
+<script th:src="@{${#themes.code('cas.javascript.file')}}"></script>
+<script type="text/javascript">
+    /*function refreshCaptcha(){
+        $("#captcha_img").attr("src","/cas/captcha.jpg?id=" + new Date() + Math.floor(Math.random()*24));
+    }*/
+</script>
 </html>

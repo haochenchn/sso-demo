@@ -23,17 +23,27 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--代理认证-->
         <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-pac4j-webflow</artifactId>
-            <version>${cas.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- 自定义认证的方式 begin -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-webflow</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-webflow-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp-config</artifactId>
             <version>${cas.version}</version>
         </dependency>
         <dependency>
@@ -46,13 +56,12 @@
             <artifactId>cas-server-core-authentication-api</artifactId>
             <version>${cas.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp-config</artifactId>
+            <artifactId>cas-server-support-generic</artifactId>
             <version>${cas.version}</version>
-            <scope>provided</scope>
         </dependency>
-
         <!--支持rest方式登录-->
         <dependency>
             <groupId>org.apereo.cas</groupId>

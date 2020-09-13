@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+         xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
     <display-name>cas-app</display-name>
@@ -31,7 +31,7 @@
     </filter-mapping>
 
     <!-- ========================单点登录开始 ======================== -->
-    <!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
+    <!-- 用于单点退出，用于实现单点登出功能，可选配置 -->
     <listener>
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
@@ -50,24 +50,33 @@
     </filter-mapping>
 
     <!-- 该过滤器用于实现单点登录功能 -->
+    <filter-mapping>
+        <filter-name>CAS Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>CAS Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>http://app2.cas.com:8082</param-value>
+            <!-- 当前Client系统的地址 -->
+        </init-param>
         <init-param>
             <param-name>casServerLoginUrl</param-name>
             <param-value>https://server.cas.com:8443/cas/login</param-value>
             <!-- 使用的CAS-Server的登录地址,一定是到登录的action -->
         </init-param>
         <init-param>
-            <param-name>serverName</param-name>
-            <param-value>http://app2.cas.com:8082</param-value>
-            <!-- 当前Client系统的地址 -->
+            <param-name>ignorePattern</param-name>
+            <param-value>/js/*|/images/*|/view/*|/css/*</param-value>
+            <!--静态资源路径，不会跳到cas去登录-->
+        </init-param>
+        <init-param>
+            <param-name>ignoreUrlPatternType</param-name>
+            <param-value>com.aaron.cas.config.SimpleUrlPatternMatcherStrategy</param-value>
         </init-param>
     </filter>
-    <filter-mapping>
-        <filter-name>CAS Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
     <!-- 该过滤器负责对Ticket的校验工作 -->
     <filter>
         <filter-name>CAS Validation Filter</filter-name>

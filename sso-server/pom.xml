@@ -30,7 +30,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- 自定义认证的方式 begin -->
+        <!-- 自定义认证的方式 -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-webflow</artifactId>
@@ -69,6 +69,24 @@
             <version>${cas.version}</version>
         </dependency>
 
+        <!--动态添加services：一引入cas-server-support-jpa-service-registry包启动就报错，未解决-->
+        <!--<dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jpa-service-registry</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-services-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-attributes</artifactId>
+            <version>${cas.version}</version>
+        </dependency>-->
+
+
         <!-- cas 的redis依赖 -->
         <!--<dependency>
             <groupId>org.apereo.cas</groupId>
@@ -89,31 +107,5 @@
         </dependency>
 
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <warName>cas</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <recompressZippedFiles>false</recompressZippedFiles>
-                    <archive>
-                        <compress>false</compress>
-                        <manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp-tomcat/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                    <overlays>
-                        <overlay>
-                            <groupId>org.apereo.cas</groupId>
-                            <artifactId>cas-server-webapp-tomcat</artifactId>
-                        </overlay>
-                    </overlays>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

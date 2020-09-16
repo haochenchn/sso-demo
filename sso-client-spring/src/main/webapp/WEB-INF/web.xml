@@ -49,11 +49,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- 该过滤器用于实现单点登录功能 -->
-    <filter-mapping>
-        <filter-name>CAS Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!-- 该过滤器负责用户的认证工作，必须启用它 -->
     <filter>
         <filter-name>CAS Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
@@ -77,7 +73,12 @@
             <param-value>com.aaron.cas.config.SimpleUrlPatternMatcherStrategy</param-value>
         </init-param>
     </filter>
-    <!-- 该过滤器负责对Ticket的校验工作 -->
+    <filter-mapping>
+        <filter-name>CAS Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 该过滤器负责对Ticket的校验工作，必须启用它 -->
     <filter>
         <filter-name>CAS Validation Filter</filter-name>
         <filter-class>org.jasig.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter</filter-class>

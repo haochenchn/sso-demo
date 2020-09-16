@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title th:text="${#themes.code('cas.page.title')}"></title>
+    <link rel="stylesheet" th:href="@{${#themes.code('cas.myself.css')}}"/>
+    <script th:src="@{${#themes.code('cas.javascript.file')}}"></script>
+</head>
+
+<body>
+<h1>登录成功</h1>
+<main role="main" class="container mt-3 mb-3">
+        <div class="alert alert-success">
+            <h2 th:utext="#{screen.success.header}">Log In Successful</h2>
+            <p th:utext="#{screen.success.success(${principal.id})}">You, <strong>username</strong>, have successfully
+                logged into the Central Authentication Service. However, you are seeing this page because CAS does not
+                know about your target destination and how to get you there. Examine the authentication request again
+                and make sure a target service/application that is authorized and registered with CAS is specified.</p>
+            <p th:utext="#{screen.success.security}">When you are finished, for security reasons, please <a
+                    href="logout">log out</a> and exit your web browser.</p>
+        </div>
+    
+</main>
+</body>
+</html>

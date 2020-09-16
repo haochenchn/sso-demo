@@ -3,7 +3,7 @@ package com.aaron.cas.config;
 
 import com.aaron.cas.listener.TGTCreateEventListener;
 import com.aaron.cas.service.TriggerLogoutService;
-import com.aaron.cas.service.impl.UserIdObtainServiceImpl;
+import com.aaron.cas.service.UserIdObtainService;
 import org.apereo.cas.CentralAuthenticationService;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class SingleLogoutTriggerConfiguration {
     // 注册事件监听tgt的创建
     @Bean
     protected TGTCreateEventListener tgtCreateEventListener() {
-        TGTCreateEventListener listener = new TGTCreateEventListener(triggerLogoutService(), new UserIdObtainServiceImpl());
+        TGTCreateEventListener listener = new TGTCreateEventListener(triggerLogoutService(), new UserIdObtainService());
         return listener;
     }
 }

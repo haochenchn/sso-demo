@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--这里的内容就和我们正常开发ssm框架里面想设置的内容类似-->
+    <settings>
+        <!-- 使用驼峰命名法转换字段。 -->
+        <setting name="mapUnderscoreToCamelCase" value="false" />
+        <setting name="cacheEnabled" value="true" /><!-- 全局映射器启用缓存 -->
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="defaultExecutorType" value="REUSE" />
+        <!--控制台打印sql-->
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+</configuration>

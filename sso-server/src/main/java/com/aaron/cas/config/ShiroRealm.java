@@ -1,15 +1,14 @@
 package com.aaron.cas.config;
 
 
-import com.aaron.cas.service.UserService;
+import com.aaron.cas.model.UserDto;
+import com.aaron.cas.service.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Map;
 
 /**
  * 在Shiro中，最终是通过Realm来获取应用程序中的用户、角色及权限信息的
@@ -18,7 +17,7 @@ import java.util.Map;
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /**
      * 验证用户身份
@@ -36,19 +35,17 @@ public class ShiroRealm extends AuthorizingRealm {
         //获取用户名 密码 第二种方式
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
         String username = usernamePasswordToken.getUsername();
-
-        Map<String, Object> user = userService.findByUserName(username);
+        UserDto user = userService.findByUserName(username);
 
         //可以在这里直接对用户名校验,或者调用 CredentialsMatcher 校验
         if (user == null) {
             throw new UnknownAccountException("用户名或密码错误！");
         }
-        if ("1".equals(user.get("state"))) {
+        if (user.getState() == 1) {
             throw new LockedAccountException("账号已被锁定,请联系管理员！");
         }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, user.get("password"), getName());
-        return info;
+        return new SimpleAuthenticationInfo(username, user.getPassword(), getName());
     }
 
     /**

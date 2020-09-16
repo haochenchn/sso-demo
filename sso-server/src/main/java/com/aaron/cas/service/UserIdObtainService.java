@@ -1,15 +1,12 @@
 
-package com.aaron.cas.service.impl;
-
-
-import com.aaron.cas.service.IUserIdObtainService;
+package com.aaron.cas.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserIdObtainServiceImpl implements IUserIdObtainService {
+public class UserIdObtainService implements IUserIdObtainService {
 
-    public UserIdObtainServiceImpl() {}
+    public UserIdObtainService() {}
 
     @Override
     public List<String> obtain(String clientName, String id) {

@@ -1,7 +1,6 @@
 package com.aaron.cas.config;
 
 import com.aaron.cas.adaptors.generic.UserNamePassWordCaptchaAuthenticationHandler;
-import com.aaron.cas.service.UserService;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
@@ -29,9 +28,6 @@ public class CustomAuthenticationConfiguration implements AuthenticationEventExe
     @Qualifier("servicesManager")
     private ServicesManager servicesManager;
 
-    @Autowired
-    private UserService userService;
-
     /**
      * 将自定义验证器注册为Bean
      * @return
@@ -42,8 +38,7 @@ public class CustomAuthenticationConfiguration implements AuthenticationEventExe
                 UserNamePassWordCaptchaAuthenticationHandler.class.getSimpleName(),
                 servicesManager,
                 new DefaultPrincipalFactory(),
-                1);
-        handler.setUserService(userService);
+                10);
         return handler;
     }
 

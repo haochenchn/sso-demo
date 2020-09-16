@@ -30,6 +30,21 @@ public class ShiroAuthenticationConfiguration  implements AuthenticationEventExe
     @Qualifier("servicesManager")
     private ServicesManager servicesManager;
 
+    @Bean
+    public AuthenticationHandler shiroAuthenticationHandler() {
+        ShiroAuthenticationHandler handler = new ShiroAuthenticationHandler(ShiroAuthenticationHandler.class.getSimpleName(),
+                servicesManager,
+                new DefaultPrincipalFactory(),
+                1);
+        return handler;
+    }
+
+    @Override
+    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
+        plan.registerAuthenticationHandler(shiroAuthenticationHandler());
+    }
+
+
     @Bean(name="securityManager")
     public SecurityManager securityManager() {
         DefaultSecurityManager securityManager =  new DefaultSecurityManager();
@@ -60,20 +75,6 @@ public class ShiroAuthenticationConfiguration  implements AuthenticationEventExe
         factoryBean.setArguments(new Object[]{securityManager()});
         return factoryBean;
     }
-
-
-    @Bean
-    public AuthenticationHandler shiroAuthenticationHandler() {
-        ShiroAuthenticationHandler handler = new ShiroAuthenticationHandler(ShiroAuthenticationHandler.class.getSimpleName(), servicesManager, new DefaultPrincipalFactory(),10);
-        return handler;
-    }
-
-    @Override
-    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
-        // TODO Auto-generated method stub
-        plan.registerAuthenticationHandler(shiroAuthenticationHandler());
-    }
-
 
 
 }

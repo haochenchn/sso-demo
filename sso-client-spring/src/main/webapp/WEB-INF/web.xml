@@ -98,7 +98,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- 该过滤器负责实现HttpServletRequest请求的包裹， 比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。 -->
+    <!--
+    该过滤器负责实现HttpServletRequest请求的包裹，
+    比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。
+    -->
     <filter>
         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
         <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>

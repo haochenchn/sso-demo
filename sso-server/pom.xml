@@ -57,11 +57,6 @@
             <version>${cas.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-generic</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
         <!--支持rest方式登录-->
         <dependency>
             <groupId>org.apereo.cas</groupId>
@@ -93,6 +88,18 @@
             <artifactId>cas-server-support-redis-ticket-registry</artifactId>
             <version>${cas.version}</version>
         </dependency>-->
+
+        <!--整合shiro-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>

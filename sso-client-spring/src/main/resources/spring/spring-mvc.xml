@@ -14,7 +14,18 @@
 	</context:component-scan>
 
 	<!-- 通过Annotation 来控制Controller -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=utf-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<!--<mvc:default-servlet-handler/>-->
 
 	<!-- 静态资源处理  css js imgs -->

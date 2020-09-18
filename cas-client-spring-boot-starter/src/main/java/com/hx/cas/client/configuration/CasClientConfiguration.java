@@ -66,9 +66,9 @@ public class CasClientConfiguration {
      */
     @Bean
     public FilterRegistrationBean filterAuthenticationRegistration() {
-        System.out.println("====================================================");
-        System.out.println("=======            开启 cas client           =======");
-        System.out.println("====================================================");
+        System.out.println("==================================================================");
+        System.out.println("=======                   开启 cas client                  =======");
+        System.out.println("==================================================================");
         final FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new AuthenticationFilter());
         // 设定匹配的路径

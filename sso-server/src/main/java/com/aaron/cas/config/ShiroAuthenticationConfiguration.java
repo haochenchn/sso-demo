@@ -1,6 +1,7 @@
 package com.aaron.cas.config;
 
 import com.aaron.cas.handler.ShiroAuthenticationHandler;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlan;
@@ -11,13 +12,12 @@ import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.services.ServicesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * shiro配置
+ * 注册验证器并添加shiro配置
  */
 @Configuration("shiroAuthenticationConfiguration")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
@@ -50,6 +50,7 @@ public class ShiroAuthenticationConfiguration  implements AuthenticationEventExe
         DefaultSecurityManager securityManager =  new DefaultSecurityManager();
         //设置自定义realm.
         securityManager.setRealm(shiroRealm());
+        SecurityUtils.setSecurityManager(securityManager);
         return securityManager;
     }
 
@@ -63,18 +64,4 @@ public class ShiroAuthenticationConfiguration  implements AuthenticationEventExe
         shiroRealm.setAuthorizationCachingEnabled(false);
         return shiroRealm;
     }
-
-    /**
-     * Spring静态注入
-     * @return
-     */
-    @Bean
-    public MethodInvokingFactoryBean getMethodInvokingFactoryBean(){
-        MethodInvokingFactoryBean factoryBean = new MethodInvokingFactoryBean();
-        factoryBean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
-        factoryBean.setArguments(new Object[]{securityManager()});
-        return factoryBean;
-    }
-
-
 }

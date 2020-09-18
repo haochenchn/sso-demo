@@ -1,7 +1,6 @@
 package com.aaron.cas.handler;
 
 import com.aaron.cas.adaptors.generic.UsernamePasswordCaptchaCredential;
-import com.aaron.cas.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -14,7 +13,6 @@ import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.security.auth.login.AccountLockedException;
 import javax.security.auth.login.AccountNotFoundException;
@@ -37,8 +35,8 @@ public class ShiroAuthenticationHandler extends AbstractPreAndPostProcessingAuth
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ShiroAuthenticationHandler.class);
 
-    @Autowired
-    private IUserService IUserService;
+    /*@Autowired
+    private IUserService userService;*/
 
     public ShiroAuthenticationHandler(String name,ServicesManager servicesManager,PrincipalFactory principalFactory,Integer order) {
         super(name, servicesManager, principalFactory, order);

@@ -36,7 +36,11 @@ public class CustomAuthWebflowConfiguration {
 
     @Bean
     public CasWebflowConfigurer defaultLoginWebflowConfigurer() {
-        final CustomWebflowConfigurer c = new CustomWebflowConfigurer(flowBuilderServices, loginFlowRegistry, applicationContext, casProperties);
+        final CustomWebflowConfigurer c = new CustomWebflowConfigurer(
+                flowBuilderServices,
+                loginFlowRegistry,
+                applicationContext,
+                casProperties);
         c.initialize();
         return c;
     }

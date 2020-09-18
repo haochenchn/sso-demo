@@ -30,19 +30,18 @@ public class UserNamePassWordCaptchaAuthenticationHandler extends AbstractPreAnd
     @Override
     protected AuthenticationHandlerExecutionResult doAuthentication(Credential credential) throws GeneralSecurityException, PreventedException {
         UsernamePasswordCaptchaCredential myCredential = (UsernamePasswordCaptchaCredential) credential;
+        String username = myCredential.getUsername();
         // TODO 这里可以添加验证码校验逻辑
         String requestCaptcha = myCredential.getCaptcha();
         if(!"123".equals(requestCaptcha)) {
             throw new CaptchaErrorException("验证码校验失败");
         }
         // 用户名密码校验
-        String username = myCredential.getUsername();
         // UserDto user = userService.findByUserName(username);
         //可以在这里直接对用户名密码校验,或者调用 CredentialsMatcher 校验
         if (!"admin".equals(username)) {
             throw new AccountNotFoundException("用户名或密码错误！");
         }
-
         return createHandlerResult(credential, this.principalFactory.createPrincipal(username));
 
     }
@@ -51,6 +50,5 @@ public class UserNamePassWordCaptchaAuthenticationHandler extends AbstractPreAnd
     public boolean supports(Credential credential) {
         return credential instanceof UsernamePasswordCaptchaCredential;
     }
-
 
 }

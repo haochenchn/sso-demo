@@ -1,9 +1,9 @@
 <%@page contentType="text/html" %>
 <%@page pageEncoding="UTF-8" %>
-<%@ page import="java.util.Map" %>
+<%@ page import="org.jasig.cas.client.authentication.AttributePrincipal" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.jasig.cas.client.authentication.AttributePrincipal" %>
+<%@ page import="java.util.Map" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<h1>当前为客户端1</h1>
+<h1>当前为客户端2</h1>
 <h2><a href="http://app1.cas.com:8081/">客户端1</a></h2>
 <h2><a href="http://app2.cas.com:8082/">客户端2</a></h2>
 

@@ -16,9 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.jasig.cas.client.authentication;
+package org.jasig.cas.client.authentication1;
 
 import org.jasig.cas.client.Protocol;
+import org.jasig.cas.client.authentication.*;
 import org.jasig.cas.client.configuration.ConfigurationKeys;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.util.CommonUtils;

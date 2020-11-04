@@ -194,36 +194,6 @@ public class SimpleHttpClientFactoryBean implements FactoryBean<SimpleHttpClient
     private CloseableHttpClient buildHttpClient() {
         CloseableHttpClient client = HttpClients.custom().setConnectionManager(getConnManage()).build();
         return client;
-        /*try {
-            final ConnectionSocketFactory plainsf = PlainConnectionSocketFactory.getSocketFactory();
-            final LayeredConnectionSocketFactory sslsf = this.sslSocketFactory;
-            final Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
-                .register("http", plainsf).register("https", sslsf).build();
-            final PoolingHttpClientConnectionManager connMgmr = new PoolingHttpClientConnectionManager(registry);
-            connMgmr.setMaxTotal(this.maxPooledConnections);
-            connMgmr.setDefaultMaxPerRoute(this.maxConnectionsPerRoute);
-            connMgmr.setValidateAfterInactivity(DEFAULT_TIMEOUT);
-            final HttpHost httpHost = new HttpHost(InetAddress.getLocalHost());
-            final HttpRoute httpRoute = new HttpRoute(httpHost);
-            connMgmr.setMaxPerRoute(httpRoute, MAX_CONNECTIONS_PER_ROUTE);
-            final RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(this.readTimeout)
-                    .setConnectTimeout((int) this.connectionTimeout).setConnectionRequestTimeout((int) this.connectionTimeout)
-                    .setCircularRedirectsAllowed(this.circularRedirectsAllowed).setRedirectsEnabled(this.redirectsEnabled)
-                    .setAuthenticationEnabled(this.authenticationEnabled).build();
-            final HttpClientBuilder builder = HttpClients.custom().setConnectionManager(connMgmr)
-                    .setDefaultRequestConfig(requestConfig).setSSLSocketFactory(sslsf)
-                    .setSSLHostnameVerifier(this.hostnameVerifier).setRedirectStrategy(this.redirectionStrategy)
-                    .setDefaultCredentialsProvider(this.credentialsProvider).setDefaultCookieStore(this.cookieStore)
-                    .setConnectionReuseStrategy(this.connectionReuseStrategy)
-                    .setConnectionBackoffStrategy(this.connectionBackoffStrategy)
-                    .setServiceUnavailableRetryStrategy(this.serviceUnavailableRetryStrategy)
-                    .setProxyAuthenticationStrategy(this.proxyAuthenticationStrategy)
-                    .setDefaultHeaders(this.defaultHeaders).useSystemProperties();
-            return builder.build();
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return null;
-        }*/
     }
 
     /**

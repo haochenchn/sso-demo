@@ -64,6 +64,12 @@
             <version>${cas.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-util-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
         <!--动态添加services：一引入cas-server-support-jpa-service-registry包启动就报错，未解决-->
         <!--<dependency>
             <groupId>org.apereo.cas</groupId>

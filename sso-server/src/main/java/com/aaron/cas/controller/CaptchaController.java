@@ -1,6 +1,9 @@
 package com.aaron.cas.controller;
 
 import com.aaron.cas.utils.CaptchaUtil;
+import org.apereo.cas.util.http.HttpMessage;
+import org.apereo.cas.util.http.SimpleHttpClient;
+import org.apereo.cas.util.http.SimpleHttpClientFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * @author Aaron
@@ -46,5 +51,14 @@ public class CaptchaController {
             e.printStackTrace();
         }
 
+    }
+
+    @RequestMapping("/test")
+    public void test() throws MalformedURLException {
+        SimpleHttpClientFactoryBean simpleHttpClientFactoryBean = new SimpleHttpClientFactoryBean();
+        SimpleHttpClient object = simpleHttpClientFactoryBean.getObject();
+        URL url = new URL("https://app2.cas.com:8082/");
+        HttpMessage httpMessage = object.sendMessageToEndPoint(url);
+        System.out.println(httpMessage);
     }
 }

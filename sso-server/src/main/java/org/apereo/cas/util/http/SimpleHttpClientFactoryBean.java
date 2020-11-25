@@ -102,12 +102,14 @@ public class SimpleHttpClientFactoryBean implements FactoryBean<SimpleHttpClient
     /**
      * The socket factory to be used when verifying the validity of the endpoint.
      */
+    // 我们不用这个sslSocketFactory，在下面代码中自己创建一个
     private SSLConnectionSocketFactory sslSocketFactory = SSLConnectionSocketFactory.getSocketFactory();
 
     /**
      * The hostname verifier to be used when verifying the validity of the endpoint.
      */
-    private HostnameVerifier hostnameVerifier = new NoopHostnameVerifier();
+    // 关闭https请求的主机认证
+    private HostnameVerifier hostnameVerifier = NoopHostnameVerifier.INSTANCE;
 
     /**
      * The credentials provider for endpoints that require authentication.
@@ -191,6 +193,7 @@ public class SimpleHttpClientFactoryBean implements FactoryBean<SimpleHttpClient
      *
      * @return the built HTTP client
      */
+    // 主要修改该方法，构建出一个关闭了https请求的主机认证的CloseableHttpClient
     private CloseableHttpClient buildHttpClient() {
         CloseableHttpClient client = HttpClients.custom().setConnectionManager(getConnManage()).build();
         return client;

@@ -17,12 +17,12 @@ keytool -genkey -alias sso -keyalg RSA -validity 3650 -keypass changeit -storepa
 
 ### 1.2 根据keystore生成证书文件
 ```
-keytool -export -alias sso -file D:/key/sso.cer -keystore D:/key/sso.keystore -validity 3650
+keytool -export -alias sso -file /home/key/sso.cer -keystore /home/key/sso.keystore -validity 3650
 ```
 
 ### 1.3 信任授权文件到jdk
 ```
-keytool -import -keystore D:/dev_soft/java/jdk1.8/jre/lib/security/cacerts -file D:/key/sso.cer -alias sso -storepass changeit
+keytool -import -keystore /opt/jdk1.8/jre/lib/security/cacerts -file /home/key/sso.cer -alias sso -storepass changeit
 
 是否信任此证书? [否]: y
 证书已添加到密钥库
@@ -35,10 +35,10 @@ keytool -delete -alias sso -keystore D:/dev_soft/java/jdk1.8/jre/lib/security/ca
 
 ## cas服务端tomcat添加配置
 ```
-<Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+<Connector port="8070" protocol="org.apache.coyote.http11.Http11Protocol"
               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
               clientAuth="false" sslProtocol="TLS"
-              keystoreFile="D:/key/sso.keystore"
+              keystoreFile="/home/key/sso.keystore"
               keystorePass="changeit" />
 
 ```
